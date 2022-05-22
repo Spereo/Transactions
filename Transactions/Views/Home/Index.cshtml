@@ -1,0 +1,33 @@
+﻿@using Transactions.Data.Models
+@using Transactions.InteractionCSV
+
+<h1>Все транзакции</h1>
+<h3>@Model.currCategory</h3>
+<div class="row mt-5 mb-2">
+    @{
+        List<Transaction> transactions = new List<Transaction>();
+        //string path = @"D:\Users\user\Desktop\Files\gender_train.csv";
+        string path = @"D:\Users\user\Desktop\Files\transactions_cut.csv";
+        Parser.Read(path, ref transactions);
+
+        for (int i = 0; i < transactions.Count % 20; i++)
+        {
+            <p>
+                Идентификатор клиента: @transactions[i].customer_id <br>
+                День и время совершения транзакции: @transactions[i].tr_datetime <br>
+                Mcc-код транзакции: @transactions[i].mcc_code <br>
+                Тип транзакции: @transactions[i].tr_type <br>
+                Сумма транзакции: @transactions[i].amount <br>
+                Идентификатор терминала: @transactions[i].TermPresent(transactions[i].term_id)
+            </p>
+        }
+
+
+    }
+</div>
+
+<button type="button" class="btn btn-outline-primary">1</button>
+<button type="button" class="btn btn-outline-primary">2</button>
+<button type="button" class="btn btn-outline-primary">3</button>
+...
+<button type="button" class="btn btn-outline-primary">110</button>
